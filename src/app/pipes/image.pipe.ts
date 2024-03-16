@@ -10,7 +10,7 @@ export class ImagePipe implements PipeTransform {
   transform(img: string='', size: string='w500'): string {
 
     if (!img) {
-      return './assets/angular-explore-banner.jpg';
+      return './assets/angular-explore-banner.png';
     }
 
     const imgUrl = `${URL}/${size}${img}`;

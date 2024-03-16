@@ -9,14 +9,13 @@ import {ModalController} from "@ionic/angular";
   styleUrls: ['./detalle.component.scss'],
 })
 export class DetalleComponent implements OnInit {
-  @Input({
-    required: true
-  }) id!: number;
+  @Input({required: true}) id!: number;
   pelicula: PeliculaDetalle = {}
   moviesServices = inject(MoviesService)
   oculto: number = 150;
   actores: Cast[] = []
   modalCtrl = inject(ModalController)
+
   constructor() {
   }
 
@@ -33,11 +32,11 @@ export class DetalleComponent implements OnInit {
     )
   }
 
-  regresar(){
+  regresar() {
     this.modalCtrl.dismiss()
   }
 
-  favorito(){
+  favorito() {
     console.log('Favorito')
   }
 
