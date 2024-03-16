@@ -1,0 +1,9 @@
+<swiper-container [slidesPerView]="3.3" [loop]="true" [freeMode]="true" >
+  @for (pelicula of movies; track pelicula.id){
+    <swiper-slide>
+      <ion-card (click)="verDetalle(pelicula.id)">
+        <img class="poster" [src]="pelicula.poster_path | imagen">
+      </ion-card>
+    </swiper-slide>
+  }
+</swiper-container>
