@@ -1,5 +1,5 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
-import {Pelicula} from "../../interfaces/interfaces";
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {Pelicula, PeliculaDetalle} from "../../interfaces/interfaces";
 import {DetalleComponent} from "../detalle/detalle.component";
 import {ModalController} from "@ionic/angular";
 
@@ -10,12 +10,16 @@ import {ModalController} from "@ionic/angular";
 })
 export class SlideshowPosterComponent  implements OnInit {
 
-  @Input() movies: Pelicula[] = [];
+  @Input() movies: Pelicula[] | PeliculaDetalle[] = [];
   modalCtrl=inject(ModalController)
+  @Output() modalClosed = new EventEmitter<void>();
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("----")
+  }
+
   async verDetalle(id:number) {
     const modal = await this.modalCtrl.create({
       component: DetalleComponent,
@@ -25,5 +29,10 @@ export class SlideshowPosterComponent  implements OnInit {
     });
 
     modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    this.modalClosed.emit();
+
   }
 }

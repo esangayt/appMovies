@@ -48,9 +48,11 @@
 
     <ion-row>
       <ion-col size="12">
+        <ion-label>Categorias</ion-label>
+
         @for (image of pelicula.genres; track image.id) {
           <ion-chip>
-            <ion-label>Genero: {{ image.name }}</ion-label>
+            <ion-label> {{ image.name }}</ion-label>
           </ion-chip>
         }
       </ion-col>

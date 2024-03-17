@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PeliculaDetalle, RespuestaCredits, RespuestaMDB} from "../interfaces/interfaces";
+import {Genre, Genres, PeliculaDetalle, RespuestaCredits, RespuestaMDB} from "../interfaces/interfaces";
 import {environment} from "../../environments/environment";
 
 
@@ -11,8 +11,10 @@ const apiKey = environment.apiKey
   providedIn: 'root'
 })
 export class MoviesService {
+  generos: Genre[] = [];
   http = inject(HttpClient)
   private pupularesPage = 0;
+
   constructor() {
   }
 
@@ -33,7 +35,7 @@ export class MoviesService {
     let mesString;
     if (mes < 10) {
       mesString = '0' + mes;
-    }else {
+    } else {
       mesString = mes;
     }
 
@@ -51,11 +53,22 @@ export class MoviesService {
   getPeliculaDetalle(id: number) {
     return this.executeQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
   }
+
   getActoresPelicula(id: number) {
     return this.executeQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
   }
 
   buscarPeliculas(texto: string) {
     return this.executeQuery<any>(`/search/movie?query=${texto}`);
+  }
+
+  cargarGeneros():Promise<Genre[]> {
+    return new Promise(resolve => {
+      this.executeQuery<Genres>(`/genre/movie/list?a=1`).subscribe(
+        response => {
+          this.generos = response.genres;
+          resolve(this.generos);
+        })
+    });
   }
 }

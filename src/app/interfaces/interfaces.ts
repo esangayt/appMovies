@@ -101,3 +101,8 @@ export interface Cast {
   order: number;
   profile_path?: string;
 }
+
+export interface Genres {
+  genres: Genre[];
+}
+
