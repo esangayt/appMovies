@@ -70,12 +70,12 @@
     @for (actor of actores; track $index) {
       <swiper-slide>
         <ion-card class="card-actor">
-          @if(actor.profile_path){
+          @if (actor.profile_path) {
             <img [src]="actor.profile_path | imagen">
           } @else {
             <img src="assets/no-avatar.jpg">
           }
-          <ion-label class="actor-name">{{actor.name}}</ion-label>
+          <ion-label class="actor-name">{{ actor.name }}</ion-label>
         </ion-card>
       </swiper-slide>
     }
@@ -84,7 +84,7 @@
 
 </ion-content>
 
-<ion-footer >
+<ion-footer>
   <ion-toolbar>
 
     <ion-buttons slot="start">
@@ -97,7 +97,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="favorito()">
         <ion-label>Favorito</ion-label>
-        <ion-icon slot="end" name="star-outline"></ion-icon>
+        <ion-icon slot="end" [name]="estrella"></ion-icon>
       </ion-button>
     </ion-buttons>
 
